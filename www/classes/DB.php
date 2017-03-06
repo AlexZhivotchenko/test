@@ -7,7 +7,7 @@ class DB
     {
         return $this->con = new PDO('mysql:host=127.0.0.1;dbname=userlistdb', 'root', '');
     }
-    public function query($sql, $class = 'stdClass')
+    public function queryAll($sql, $class = 'stdClass')
     {
         $res = ($this->con)->query($sql);
         if (false === $sql)
@@ -20,5 +20,10 @@ class DB
             $ris[] = $row;
         }
         return $ris;
+    }
+
+    public function queryOne($sql, $class = 'stdClass')
+    {
+        return $this->queryAll($sql, $class)[0];
     }
 }
