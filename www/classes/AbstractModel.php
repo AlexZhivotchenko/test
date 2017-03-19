@@ -1,23 +1,25 @@
 <?php
 
-require_once  __DIR__ . '/../models/News.php';
+require_once  __DIR__ . '/IModel.php';
+require_once __DIR__ . '/DB.php';
 
-class AbstractModel
+abstract class AbstractModel
 {
-    protected static $table;
-    protected static $class;
-    public static function getAll()
-    {
-        $db = new DB();
-        $sql = 'SELECT * FROM ' . static::$table;
-        return $db->queryAll($sql, static::$class);
+    static protected $table;
 
+    public static function findAll()
+    {
+        $class = get_called_class();
+        $sql = 'SELECT * FROM ' . static::$table;
+        $db = new DB();
+        $db->setClassName($class);
+        return $db->query($sql);
     }
 
-    public static function getOne($id)
+    public static function findOneByPc($id)
     {
+        $sql = 'SELECT * FROM ' . static::$table . ' WHERE id=:id';
         $db = new DB();
-        $sql = 'SELECT * FROM ' . static::$table . 'WHERE id=' . $id;
-        return $db->queryOne($sql, static::$class);
+        return $db->query($sql, [':id' => $id]);
     }
 }
