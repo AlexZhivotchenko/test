@@ -8,9 +8,10 @@ class NewsController
 {
     public function actionAll()
     {
-       var_dump(
-           NewsModel::findAll()
-       );
+        $article = new NewsModel();
+        $article->name ='Hi!';
+        $article->text = 'My friends';
+        $article->insert();
 //        $news = News::getAll();
 //        $view = new View();
 //        $view->items = $news;

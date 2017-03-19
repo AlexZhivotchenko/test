@@ -5,7 +5,7 @@ class NewsModel
 {
     protected static $table = 'news';
 
-    public $id;
-    public $name;
-    public $text;
+//    public $id;
+//    public $name;
+//    public $text;
 }
